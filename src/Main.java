@@ -65,9 +65,20 @@ public class Main {
         String username = scanner.nextLine();
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
+
+        // Log in the user
         User user = authService.logIn(username, password);
-        System.out.println("Welcome, " + user.getUsername() + "!");
-        // TODO Later: Add the to-do list operations
+
+        if (user != null) {
+            System.out.println("Welcome, " + user.getUsername() + "!");
+            // Create an instance of the ToDoList class with the logged-in user
+            ToDoList todoList = new ToDoList(user);
+
+            // Call the run method on the ToDoList instance
+            todoList.run();
+        } else {
+            System.out.println("Invalid username or password. Please try again.");
+        }
     }
 
     /**
@@ -80,6 +91,7 @@ public class Main {
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
         User user = authService.signUp(username, password);
+
         // TODO Now: Show a message based on the result of the signUp method:
         // - If the user is not null, show "User <username> has been created successfully!"
         if(user != null){
@@ -89,6 +101,7 @@ public class Main {
         else{
             System.out.println("The username is already taken!");
         }
+master
     }
 
     /**
